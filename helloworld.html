@@ -1,1 +1,688 @@
-hello world!
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端个人简历 - 即时设计</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            display: flex;
+            color: #333;
+        }
+        /* 左侧侧边栏 */
+        .sidebar {
+            width: 280px;
+            background: #fff;
+            padding: 30px 20px;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        .avatar-box {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+        .side-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin: 6px 0;
+            color: #555;
+        }
+        .skill-circle-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 8px;
+            margin: 20px 0;
+        }
+        .skill-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #00b96b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #00b96b;
+            position: relative;
+        }
+        .btn-resume {
+            width: 100%;
+            background: #00b96b;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        /* 主内容区域 */
+        .main-content {
+            margin-left: 300px;
+            padding: 20px 30px;
+            width: calc(100% - 300px);
+        }
+        .section-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.04);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .section-tag {
+            font-size: 12px;
+            color: #999;
+            background: #f0f8f4;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        h2 {
+            font-size: 26px;
+        }
+        .green-text {
+            color: #00b96b;
+        }
+        .intro-row {
+            display: flex;
+            gap: 30px;
+        }
+        .intro-text {
+            flex: 1;
+        }
+        .intro-img {
+            width: 180px;
+            height: 220px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .tag-group {
+            margin: 15px 0;
+        }
+        .tag-item {
+            background: #f0f8f4;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        .btn-hire {
+            background: #00b96b;
+            color: #fff;
+            border: none;
+            padding: 9px 24px;
+            border-radius: 22px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .about-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .contact-line {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        .data-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin: 25px 0;
+        }
+        .data-item h3 {
+            font-size: 24px;
+            color: #00b96b;
+        }
+        .data-item p {
+            font-size: 12px;
+            color: #777;
+        }
+        /* 我的服务 四宫格 */
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .service-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        .service-num {
+            font-size: 32px;
+            color: #ddd;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            z-index: 0;
+        }
+        .service-icon {
+            text-align: right;
+            color: #00b96b;
+            font-size: 20px;
+        }
+        .service-card h4 {
+            position: relative;
+            z-index: 1;
+            margin: 8px 0;
+        }
+        .service-card p {
+            font-size: 12px;
+            color: #777;
+            line-height: 1.6;
+        }
+        /* 优势环形进度 */
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .adv-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid #00b96b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: bold;
+            color: #00b96b;
+        }
+        .adv-name {
+            font-size: 12px;
+            color: #666;
+        }
+        /* 经历 */
+        .timeline-item {
+            border-left: 2px solid #eee;
+            padding-left: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #00b96b;
+            border-radius: 50%;
+            position: absolute;
+            left: -5px;
+            top: 5px;
+        }
+        .time-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #888;
+        }
+        .timeline-item h4 {
+            margin: 5px 0;
+        }
+        .timeline-item p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+        /* 项目作品 */
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .work-img {
+            width: 100%;
+            height: 160px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        .more-work {
+            display: block;
+            width: 160px;
+            margin: 15px auto 0;
+            background: #00b96b;
+            color: white;
+            border: none;
+            padding: 9px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        /* 博客 */
+        .blog-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 18px;
+            display: flex;
+            gap: 15px;
+        }
+        .blog-img {
+            width: 140px;
+            height: 110px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        .blog-text {
+            flex: 1;
+        }
+        .blog-date {
+            font-size: 11px;
+            color: #999;
+        }
+        .blog-desc {
+            font-size: 12px;
+            color: #666;
+            margin: 6px 0;
+            line-height: 1.5;
+        }
+        .blog-read {
+            font-size: 12px;
+            color: #00b96b;
+            border: 1px solid #00b96b;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        /* 联系表单 */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .contact-info p {
+            margin: 12px 0;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-item {
+            margin-bottom: 12px;
+        }
+        .form-item input, .form-item textarea {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .submit-btn {
+            background: #00b96b;
+            color: white;
+            border: none;
+            padding: 10px 26px;
+            border-radius: 22px;
+            cursor: pointer;
+        }
+        /* 右侧悬浮导航 */
+        .float-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .nav-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .nav-dot.active {
+            background: #00b96b;
+            color: #fff;
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 左侧侧边栏 -->
+    <aside class="sidebar">
+        <div class="avatar-box">
+            <img class="avatar" src="https://picsum.photos/id/1027/80/80" alt="头像">
+            <div>莫名其妙DESIGN</div>
+            <small style="color:#777">前端工程师</small>
+        </div>
+        <div class="side-title">居住地:</div>
+        <div class="info-row">
+            <span>城市:</span>
+            <span>北京市</span>
+        </div>
+        <div class="info-row">
+            <span>年龄:</span>
+            <span>26</span>
+        </div>
+        <div class="side-title">技能</div>
+        <div class="skill-circle-wrap">
+            <div class="skill-circle">90%<br><small>HTML</small></div>
+            <div class="skill-circle">85%<br><small>VUE</small></div>
+            <div class="skill-circle">80%<br><small>CSS3</small></div>
+            <div class="skill-circle">90%<br><small>JS</small></div>
+        </div>
+        <button class="btn-resume">下载简历</button>
+    </aside>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+        <!-- 简介板块 -->
+        <section class="section-card" id="intro">
+            <div class="section-header">
+                <span class="section-tag">简介</span>
+            </div>
+            <div class="intro-row">
+                <div class="intro-text">
+                    <h2>即时设计 <span class="green-text">前端好好玩啊!</span></h2>
+                    <p style="font-size:12px;color:#777;margin:10px 0;line-height:1.7;">
+                        我是一个前端开发人员，我乐观开朗，踏实努力，善于有效沟通与团队合作，对于新技术有很强的求知欲。
+                    </p>
+                    <div class="tag-group">
+                        <span class="tag-item">前端开发</span>
+                        <span class="tag-item">全职工作</span>
+                    </div>
+                    <button class="btn-hire">聘用我</button>
+                </div>
+                <img class="intro-img" src="https://picsum.photos/id/1023/180/220" alt="个人照片">
+            </div>
+        </section>
+
+        <!-- 关于我 -->
+        <section class="section-card" id="about">
+            <div class="section-header">
+                <span class="section-tag">关于我</span>
+            </div>
+            <h2>关于我</h2>
+            <p class="about-desc">
+                嗨，我的名字叫某某某，目前正在寻找一份新的工作机会。我曾在一家知名互联网公司担任前端开发工程师，负责公司多个项目的前端开发工作。在过去的工作中，我积累了丰富的前端开发经验和技能，同时也逐渐形成了自己的工作风格和方法论。我认为一个好的前端开发工程师应该具备良好的沟通能力、团队协作能力和学习能力，这些都是我在过去的工作中所锤炼出来的。
+            </p>
+            <div class="tag-group">
+                <span class="tag-item">HTML5 & CSS3(95%)</span>
+                <span class="tag-item">VUE&REACT(90%)</span>
+                <span class="tag-item">JAVASCRIPT(95%)</span>
+            </div>
+            <div class="contact-line">
+                <div>电话：15211145XXX</div>
+                <div>Email：15211145XXX@qq.com</div>
+                <div>微信号：即时设计123</div>
+                <div>语言：普通话、英语</div>
+                <div>Github：github.com/user</div>
+                <div>Gitee：gitee.com/user</div>
+            </div>
+            <div class="data-row">
+                <div class="data-item">
+                    <h3>10+</h3>
+                    <p>工作经验</p>
+                </div>
+                <div class="data-item">
+                    <h3>185+</h3>
+                    <p>参与项目与日</p>
+                </div>
+                <div class="data-item">
+                    <h3>5+</h3>
+                    <p>开源迭代库</p>
+                </div>
+                <div class="data-item">
+                    <h3>15</h3>
+                    <p>获得的奖项</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 我的服务 -->
+        <section class="section-card" id="service">
+            <div class="section-header">
+                <span class="section-tag">服务项目</span>
+            </div>
+            <h2>我的服务</h2>
+            <p style="font-size:12px;color:#777;margin:8px 0;">我设计的产品不仅漂亮，我让它们可以运用使用，无论何时都可以！</p>
+            <div class="service-grid">
+                <div class="service-card">
+                    <span class="service-num">01</span>
+                    <div class="service-icon">⧫</div>
+                    <h4>UI/UX 设计</h4>
+                    <p>"UX设计"代表"用户体验设计"，用户体验团队从研究用户如何与产品或服务交互，以了解用户的需求。</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-num">02</span>
+                    <div class="service-icon">🌐</div>
+                    <h4>WEB开发</h4>
+                    <p>Web开发是创建和开发基于互联网的应用程序的过程,它涵盖了多个方面,包括前端开发和后端开发等。</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-num">03</span>
+                    <div class="service-icon">📈</div>
+                    <h4>SEO/营销</h4>
+                    <p>营销好的网站自然会带来更多产品曝光度，完成品牌建设的第一步。</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-num">04</span>
+                    <div class="service-icon">♔</div>
+                    <h4>品牌与战略</h4>
+                    <p>战略品牌是将品牌作为核心竞争力以获取差别利润与价值的企业经营战略,是企业经营战略非常关键的一种。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 我的优势 -->
+        <section class="section-card" id="skill">
+            <div class="section-header">
+                <span class="section-tag">技能</span>
+            </div>
+            <h2>我的优势</h2>
+            <p style="font-size:12px;color:#777;margin:8px 0;">
+                6年+前端开发经验，熟练使用CSS3布局，js开发，熟练使用vue、jquery、Node.js，多种MVVM开发模式，多次主导公司大型网站、丰富的项目经验，多端且快速定位、解决问题的能力，关注Web发展，持续研究新技术，团队技术带头领头人，对前端性能优化、监控有一定见解
+            </p>
+            <div class="adv-grid">
+                <div>
+                    <div class="adv-circle">90%</div>
+                    <div class="adv-name">HTML5</div>
+                </div>
+                <div>
+                    <div class="adv-circle">85%</div>
+                    <div class="adv-name">JAVASCRIPT</div>
+                </div>
+                <div>
+                    <div class="adv-circle">95%</div>
+                    <div class="adv-name">VUE</div>
+                </div>
+                <div>
+                    <div class="adv-circle">90%</div>
+                    <div class="adv-name">CSS3</div>
+                </div>
+                <div>
+                    <div class="adv-circle">90%</div>
+                    <div class="adv-name">NodeJS</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作经历 -->
+        <section class="section-card" id="exp">
+            <div class="section-header">
+                <span class="section-tag">经历</span>
+            </div>
+            <h2>工作经历</h2>
+            <p class="about-desc">
+                作为一个web前端开发，我一直不断的学习和实践一些新的前端技术，积累自己的见识和技能宽度。做人做事我都秉持谦逊和积极负责的态度，对工作我向来都是认真谨慎，自己在前端技术这条道路上不断的实践和前进，我喜欢与人分享看到的新东西，并与志同道合的人进行思维碰撞。
+            </p>
+            <div class="timeline-item">
+                <div class="time-head">
+                    <span>腾讯</span>
+                    <span>2023年-至今</span>
+                </div>
+                <h4>首席UX设计师</h4>
+                <p>用户体验设计师就是对产品进行用户体验设计的人才。用户体验设计,也即是我们常说的UE设计,它以用户为中心,保证产品的设计满足用户的心理、生理双重需求,从而保证产品能够吸引、留存。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="time-head">
+                    <span>Google</span>
+                    <span>2018-2023</span>
+                </div>
+                <h4>UI设计师</h4>
+                <p>用户体验设计师就是对产品进行用户体验设计的人才。用户体验设计,也即是我们常说的UE设计,它以用户为中心,保证产品的设计满足用户的心理、生理双重需求,从而保证产品能够吸引、留存。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="time-head">
+                    <span>Apple</span>
+                    <span>2014-2018</span>
+                </div>
+                <h4>人机界面设计师</h4>
+                <p>人机界面设计是指通过一定的手段对用户界面有目标和计划的一种创作活动。大部分为商业性质、少部分为艺术性质。</p>
+            </div>
+        </section>
+
+        <!-- 教育背景 -->
+        <section class="section-card">
+            <div class="section-header">
+                <span class="section-tag">教育背景</span>
+            </div>
+            <div class="timeline-item">
+                <div class="time-head">
+                    <span>XX社会大学</span>
+                    <span>2014-2018</span>
+                </div>
+                <h4>软件工程</h4>
+                <p>主修课程:C/C++程序设计、Java程序设计、数据结构、计算方法、编译原理、软件工程、操作系统原理、数据库系统原理、网络数据库等GPA3.8/4.0在校四年均保持排名位于专业前10%参加过为期3个月的实践活动，该活动主题主要关于互联网产品设计。</p>
+            </div>
+        </section>
+
+        <!-- 项目作品 -->
+        <section class="section-card" id="works">
+            <div class="section-header">
+                <span class="section-tag">作品</span>
+            </div>
+            <h2>项目作品</h2>
+            <p style="font-size:12px;color:#777;margin:8px 0;">我设计的产品不仅漂亮，我让它们可以运用使用，无论何时都可以！</p>
+            <div class="work-grid">
+                <img class="work-img" src="https://picsum.photos/id/1060/500/160">
+                <img class="work-img" src="https://picsum.photos/id/1063/500/160">
+                <img class="work-img" src="https://picsum.photos/id/1059/500/160">
+                <img class="work-img" src="https://picsum.photos/id/1073/500/160">
+            </div>
+            <button class="more-work">更多作品...</button>
+        </section>
+
+        <!-- 我的博客 -->
+        <section class="section-card" id="blog">
+            <div class="section-header">
+                <span class="section-tag">博客</span>
+            </div>
+            <h2>我的博客</h2>
+            <p style="font-size:12px;color:#777;margin:8px 0;">我博客我博客我博客我博客我博客我博客我博客我博客我博客我博客我博客我博客！</p>
+            <div class="blog-item">
+                <img class="blog-img" src="https://picsum.photos/id/1060/140/110">
+                <div class="blog-text">
+                    <div class="blog-date">UI设计，2024年05月03日</div>
+                    <div class="blog-desc">
+                        UI设计在包装设计中的构图是将商品包装展示面的商标、图形、文字和组合排列在一起的一个完整的画面。这四方面的组合构成了包装装潢的整体效果。商品设计构图要素商标、图形、文字和色彩的运用得正确、适当、美观、简易 从而不会让消费者产生视觉疲劳，一目了然地看到商品的价值核心
+                    </div>
+                    <span class="blog-read">阅读详情>></span>
+                </div>
+            </div>
+            <div class="blog-item">
+                <img class="blog-img" src="https://picsum.photos/id/1073/140/110">
+                <div class="blog-text">
+                    <div class="blog-date">UI设计，2024年05月03日</div>
+                    <div class="blog-desc">
+                        UI设计在包装设计中的构图是将商品包装展示面的商标、图形、文字和组合排列在一起的一个完整的画面。这四方面的组合构成了包装装潢的整体效果。商品设计构图要素商标、图形、文字和色彩的运用得正确、适当、美观、简易 从而不会让消费者产生视觉疲劳，一目了然地看到商品的价值核心
+                    </div>
+                    <span class="blog-read">阅读详情>></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我 -->
+        <section class="section-card" id="contact">
+            <div class="section-header">
+                <span class="section-tag">联系方式</span>
+            </div>
+            <h2>联系我</h2>
+            <p class="about-desc">
+                作为一个web前端开发，我一直不断的学习和实践一些新的前端技术，积累自己的见识和技能宽度。做人做事我都秉持谦逊和积极负责的态度，对工作我向来都是认真谨慎，自己在前端技术这条道路上不断的实践和前进，我喜欢与人分享看到的新东西，并与志同道合的人进行思维碰撞。
+            </p>
+            <div class="contact-wrap">
+                <div class="contact-info">
+                    <p>📍 东城街道20号</p>
+                    <p>✉ E-mail: smsh123232@qq.com</p>
+                    <p>📞 电话：13897141215</p>
+                </div>
+                <form>
+                    <div class="form-item">
+                        <input placeholder="姓名">
+                    </div>
+                    <div class="form-item">
+                        <input placeholder="Email">
+                    </div>
+                    <div class="form-item">
+                        <textarea rows="4" placeholder="信息"></textarea>
+                    </div>
+                    <button class="submit-btn">提交信息</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            Copyright by @xxadmin.com
+        </footer>
+    </main>
+
+    <!-- 右侧悬浮导航 -->
+    <div class="float-nav">
+        <div class="nav-dot active">⌂</div>
+        <div class="nav-dot">👤</div>
+        <div class="nav-dot">🛠</div>
+        <div class="nav-dot">⚙</div>
+        <div class="nav-dot">💼</div>
+        <div class="nav-dot">📝</div>
+        <div class="nav-dot">✉</div>
+    </div>
+</body>
+</html>
